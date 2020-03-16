@@ -17,6 +17,7 @@ def translate_sequence(rna_sequence, genetic_code):
     rna_sequence = rna_sequence.upper()
     aa_seq = ""
     stop_codons = ["UAG", "UAA", "UGA"]
+    
     if rna_sequence[0:3] not in stop_codons:
         for i in range(0, len(rna_sequence), codon_length):
             codon = rna_sequence[i:i + 3]
@@ -43,7 +44,30 @@ def get_all_translations(rna_sequence, genetic_code):
     If no amino acids can be translated from `rna_sequence`, an empty list is
     returned.
     """
-    pass
+    seq_list = []
+    rna_sequence = rna_sequence.upper()
+    start_position = 0
+
+    def translate(start_position, rna_sequence, genetic_code):
+        codon_length = 3
+        aa_seq = ""
+        stop_codons = ["UAG", "UAA", "UGA"]
+        for i in range(start_position, len(rna_sequence), codon_length):
+            codon = rna_sequence[i:i + 3]
+            if codon in stop_codons:
+                break
+            elif len(codon) != 3:
+                break
+            else: aa_seq += genetic_code[codon]
+        return aa_seq
+
+    while start_position < 3:
+        start_codon = rna_sequence[start_position:start_position + 3]
+        if start_codon == "AUG"
+            translated_seq = translate(start_position, rna_sequence, genetic_code)
+            seq_list.append(translated_seq)
+            start_position += 1
+    return seq_list
 
 def get_reverse(sequence):
     """Reverse orientation of `sequence`.
