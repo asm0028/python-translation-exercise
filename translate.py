@@ -13,7 +13,18 @@ def translate_sequence(rna_sequence, genetic_code):
     If `rna_sequence` is less than 3 bases long, or starts with a stop codon,
     an empty string is returned.
     """
-    pass
+    codon_length=3
+    aa_seq = ""
+    stop_codons = ["UAG", "UAA", "UGA"]
+    if len(rna_sequence)%3 == 0:
+        if rna_sequence[0:3] not in stop_codons:
+            for i in range(0, len(rna_sequence), codon_length):
+                codon = rna_sequence[i:i + 3]
+                if codon in stop_codons:
+                    break
+                else:
+                    aa_seq += genetic_code[codon]
+    return aa_seq
 
 def get_all_translations(rna_sequence, genetic_code):
     """Get a list of all amino acid sequences encoded by an RNA sequence.
@@ -39,7 +50,8 @@ def get_reverse(sequence):
 
     If `sequence` is empty, an empty string is returned.
     """
-    pass
+    sequence = sequence[::-1].upper()
+    return sequence
 
 def get_complement(sequence):
     """Get the complement of `sequence`.
@@ -48,7 +60,16 @@ def get_complement(sequence):
 
     If `sequence` is empty, an empty string is returned.
     """
-    pass
+    sequence = sequence.upper()
+    for base in sequence:
+        if base == "A":
+            base = "T"
+        elif base == "C":
+            base = "G"
+        elif base == "G":
+            base = "C"
+        elif base == "T":
+            base = "A" 
 
 def reverse_and_complement(sequence):
     """Get the reversed and complemented form of `sequence`.
@@ -58,7 +79,18 @@ def reverse_and_complement(sequence):
 
     If `sequence` is empty, an empty string is returned.
     """
-    pass
+    reversed = get_reverse(sequence)
+    complement = ""
+    for base in reversed:
+        if base == "A":
+            complement += "U"
+        elif base == "C":
+            complement += "G"
+        elif base == "G":
+            complement += "C"
+        elif base == "U":
+            complement += "A"
+    return complement
 
 def get_longest_peptide(rna_sequence, genetic_code):
     """Get the longest peptide encoded by an RNA sequence.
