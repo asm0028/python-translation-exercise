@@ -132,6 +132,7 @@ def get_longest_peptide(rna_sequence, genetic_code):
     seq_list = []
     rna_sequence = rna_sequence.upper()
     start_position = 0
+    longest_seq = ""
 
     def translate(start_position, rna_sequence, genetic_code):
         codon_length = 3
@@ -155,10 +156,10 @@ def get_longest_peptide(rna_sequence, genetic_code):
             start_position += 1
         return seq_list
 
-    comp_seq = reverse_and_complement(seq_list)
+    comp_seq = reverse_and_complement(rna_sequence)
 
     seq_list = add_valid_sequences(start_position, rna_sequence, genetic_code, seq_list)
-    seq_list = add_valid_sequences(start_position, comp_seq, genetic code, seq_list)
+    seq_list = add_valid_sequences(start_position, comp_seq, genetic_code, seq_list)
 
     max_length = -1
     for seq in seq_list:
