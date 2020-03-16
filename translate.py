@@ -61,12 +61,12 @@ def get_all_translations(rna_sequence, genetic_code):
             else: aa_seq += genetic_code[codon]
         return aa_seq
 
-    while start_position < 3:
+    while start_position < len(rna_sequence):
         start_codon = rna_sequence[start_position:start_position + 3]
-        if start_codon == "AUG"
+        if start_codon == "AUG":
             translated_seq = translate(start_position, rna_sequence, genetic_code)
             seq_list.append(translated_seq)
-            start_position += 1
+        start_position += 1
     return seq_list
 
 def get_reverse(sequence):
